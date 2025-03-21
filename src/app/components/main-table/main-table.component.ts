@@ -4,6 +4,7 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { StatesComponent } from "../states/states.component";
 
 export interface UserData {
   id: string;
@@ -49,13 +50,13 @@ const NAMES: string[] = [
  * @title Data table with sorting, pagination, and filtering.
  */
 @Component({
-  selector: 'main-table',
+  selector: 'app-main-table',
   styleUrl: 'main-table.component.scss',
   templateUrl: 'main-table.component.html',
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule],
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, StatesComponent],
 })
 export class MainTableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['number', 'concept', 'state', 'action'];
+  displayedColumns: string[] = ['number', 'concept', 'state', 'action', 'states'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

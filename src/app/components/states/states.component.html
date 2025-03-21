@@ -1,1 +1,10 @@
-<p>states works!</p>
+<div class="states-container">
+    <div *ngFor="let state of states; let i = index" class="state-item">
+      <span>{{ state.name }}</span>
+      <span class="status-icon">
+        <mat-icon *ngIf="state.checked" color="primary">check</mat-icon>
+        <mat-icon *ngIf="!state.checked" color="warn">close</mat-icon>
+      </span>
+    </div>
+  </div>
+  

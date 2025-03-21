@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 import { MainTableComponent } from "./components/main-table/main-table.component";
+import { StatesComponent } from "./components/states/states.component";
 
 @Component({
   selector: 'app-root',
