@@ -5,25 +5,14 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { StatesComponent } from "../states/states.component";
+import { DashButtonComponent } from "../dash-button/dash-button.component";
 
 export interface PolicyData {
   number: string;
   concept: string;
   states: { name: string; checked: boolean }[];
-  fruit: string;
 }
 
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
 const CONCEPTS: string[] = [
   'OBJETO DE LA LICITACIÓN O EL CONTRATO: Compra de equipos informáticos',
   'OBJETO DE LA LICITACIÓN O EL CONTRATO: Servicio de mantenimiento de edificios',
@@ -54,7 +43,7 @@ const CONCEPTS: string[] = [
   selector: 'app-main-table',
   styleUrl: 'main-table.component.scss',
   templateUrl: 'main-table.component.html',
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, StatesComponent],
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, StatesComponent, DashButtonComponent],
 })
 export class MainTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['number', 'concept', 'states', 'action'];
@@ -102,6 +91,5 @@ function createNewUser(nro: number): PolicyData {
     number: nro.toString(),
     concept: concept,
     states: generateRandomStates(),
-    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
   };
 }
