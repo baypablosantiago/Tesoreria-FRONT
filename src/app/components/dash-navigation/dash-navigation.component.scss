@@ -4,6 +4,8 @@
 
 .sidenav {
   width: 200px;
+  background-color: #dbb8ff;
+  border-top-right-radius: 0px;
 }
 
 .sidenav .mat-toolbar {
@@ -12,6 +14,7 @@
 
 .mat-toolbar.mat-primary {
   position: sticky;
+  background-color: #dbb8ff;
   top: 0;
   z-index: 1;
 }
