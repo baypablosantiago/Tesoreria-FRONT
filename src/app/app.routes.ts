@@ -4,6 +4,6 @@ import { DashNavigationComponent } from './pages/dash-navigation/dash-navigation
 
 export const routes: Routes = [
     { path: 'main-table', component: MainTableComponent },
-    { path: 'dash-navigation/:id', component: DashNavigationComponent },
+    { path: 'dash-navigation/:number', component: DashNavigationComponent },
     { path: '', redirectTo: '/main-table', pathMatch: 'full' }
   ];
