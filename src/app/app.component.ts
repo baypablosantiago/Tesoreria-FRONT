@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
-import { MainTableComponent } from "./components/main-table/main-table.component";
-import { DashNavigationComponent } from "./components/dash-navigation/dash-navigation.component";
+import { MainTableComponent } from './pages/main-table/main-table.component';
+import { DashNavigationComponent } from "./pages/dash-navigation/dash-navigation.component";
 
 
 @Component({

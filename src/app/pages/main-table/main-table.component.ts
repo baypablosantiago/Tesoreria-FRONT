@@ -4,8 +4,9 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { StatesComponent } from "../states/states.component";
-import { DashButtonComponent } from "../dash-button/dash-button.component";
+import { StatesComponent } from '../../components/states/states.component';
+import { DashButtonComponent } from '../../components/dash-button/dash-button.component';
+import { RouterModule } from '@angular/router';
 
 export interface PolicyData {
   number: string;
@@ -43,7 +44,7 @@ const CONCEPTS: string[] = [
   selector: 'app-main-table',
   styleUrl: 'main-table.component.scss',
   templateUrl: 'main-table.component.html',
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, StatesComponent, DashButtonComponent],
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, StatesComponent, DashButtonComponent,RouterModule],
 })
 export class MainTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['number', 'concept', 'states', 'action'];
