@@ -19,7 +19,7 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatButtonModule,
     MatCardModule
-  ]
+]
 })
 export class DashboardComponent {
   private breakpointObserver = inject(BreakpointObserver);

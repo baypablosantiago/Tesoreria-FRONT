@@ -8,7 +8,6 @@ import { StatesComponent } from '../states/states.component';
 import { DashButtonComponent } from '../dash-button/dash-button.component';
 import { RouterModule } from '@angular/router';
 import { PolicyCreateComponent } from "../policy-create/policy-create.component";
-import { PolicyDeleteComponent } from "../policy-delete/policy-delete.component";
 
 export interface PolicyData {
   number: string;
@@ -54,8 +53,7 @@ const CONCEPTS: string[] = [
     StatesComponent,
     DashButtonComponent,
     RouterModule,
-    PolicyCreateComponent,
-    PolicyDeleteComponent
+    PolicyCreateComponent
 ],
 })
 export class MainTableComponent implements AfterViewInit {

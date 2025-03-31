@@ -22,7 +22,7 @@ import { ActivatedRoute } from '@angular/router';
     MatListModule,
     MatIconModule,
     AsyncPipe,
-    DashboardComponent
+    DashboardComponent,
 ]
 })
 export class DashNavigationComponent {
