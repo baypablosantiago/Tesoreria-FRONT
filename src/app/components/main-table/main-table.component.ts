@@ -8,6 +8,7 @@ import { StatesComponent } from '../states/states.component';
 import { DashButtonComponent } from '../dash-button/dash-button.component';
 import { RouterModule } from '@angular/router';
 import { PolicyCreateComponent } from "../policy-create/policy-create.component";
+import { PolicyDeleteComponent } from "../policy-delete/policy-delete.component";
 
 export interface PolicyData {
   number: string;
@@ -45,16 +46,17 @@ const CONCEPTS: string[] = [
   styleUrl: 'main-table.component.scss',
   templateUrl: 'main-table.component.html',
   imports: [
-    MatFormFieldModule, 
-    MatInputModule, 
-    MatTableModule, 
-    MatSortModule, 
-    MatPaginatorModule, 
-    StatesComponent, 
-    DashButtonComponent, 
-    RouterModule, 
-    PolicyCreateComponent
-  ],
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    StatesComponent,
+    DashButtonComponent,
+    RouterModule,
+    PolicyCreateComponent,
+    PolicyDeleteComponent
+],
 })
 export class MainTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['number', 'concept', 'states', 'action'];

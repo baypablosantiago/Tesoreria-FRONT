@@ -4,11 +4,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 
 @Component({
-  selector: 'app-policy-create',
+  selector: 'app-policy-delete',
   imports: [MatButtonModule, MatDividerModule, MatIconModule],
-  templateUrl: './policy-create.component.html',
-  styleUrl: './policy-create.component.scss'
+  templateUrl: './policy-delete.component.html',
+  styleUrl: './policy-delete.component.scss'
 })
-export class PolicyCreateComponent {
+export class PolicyDeleteComponent {
 
 }
