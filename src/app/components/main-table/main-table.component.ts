@@ -11,7 +11,9 @@ import { PolicyCreateComponent } from "../policy-create/policy-create.component"
 
 export interface PolicyData {
   number: string;
+  insure_company: string,
   concept: string;
+  company: string; 
   states: { name: string; checked: boolean }[];
 }
 
@@ -37,6 +39,38 @@ const CONCEPTS: string[] = [
   'OBJETO DE LA LICITACIÓN O EL CONTRATO: Desarrollo de plataformas web y aplicaciones móviles para facilitar trámites ciudadanos y mejorar la transparencia en la gestión pública. Se requiere una interfaz accesible e intuitiva, con funcionalidades de autogestión y herramientas de participación ciudadana para fortalecer la relación entre gobierno y sociedad.',
 ];
 
+const COMPANIES: string[] = [
+  'DEL LITORAL OBRAS, SERVICIOS Y MONTAJES S.A. 30-69155938-2',
+  'CONSTRUCCIONES DEL SUR S.A. 30-61234567-8',
+  'INGENIERÍA Y MONTAJES ARGENTINA S.R.L. 30-70987654-3',
+  'TECNOLOGÍAS AMBIENTALES S.A. 30-65432198-7',
+  'SERVICIOS INDUSTRIALES DEL NORTE S.R.L. 30-67895432-1',
+];
+
+const INSURERS: string[] = [
+  'Instituto Autárquico Provincial del Seguro',
+  'La Caja de Ahorro y Seguro S.A.',
+  'Federación Patronal Seguros S.A.',
+  'Sancor Seguros',
+  'Seguros Rivadavia',
+  'Grupo Asegurador La Segunda',
+  'San Cristóbal Seguros',
+  'Provincia Seguros S.A.',
+  'Meridional Seguros',
+  'Nación Seguros S.A.',
+  'Orbis Seguros',
+  'Allianz Argentina',
+  'Zurich Argentina Seguros',
+  'BBVA Seguros',
+  'Mapfre Argentina',
+  'Berkley International Seguros',
+  'Triunfo Seguros',
+  'Galeno Seguros',
+  'Paraná Seguros',
+  'Boston Seguros',
+];
+
+
 /**
  * @title Data table with sorting, pagination, and filtering.
  */
@@ -57,8 +91,7 @@ const CONCEPTS: string[] = [
 ],
 })
 export class MainTableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['number', 'concept', 'states', 'action'];
-  dataSource: MatTableDataSource<PolicyData>;
+  displayedColumns: string[] = ['number', 'insurance company','concept', 'company', 'states', 'action'];  dataSource: MatTableDataSource<PolicyData>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -88,7 +121,7 @@ export class MainTableComponent implements AfterViewInit {
 
 /** Genera un conjunto de estados aleatorios */
 function generateRandomStates(): { name: string; checked: boolean }[] {
-  const stateNames = ['Recibida en correo', 'Cargado en SIAF', 'Retención Pagada'];
+  const stateNames = ['Recibida en correo.', 'Cargado en SIAF con concepto: ___', 'Tiene retencion de fondo de reparo.','Retención Pagada.'];
   return stateNames.map(name => ({
     name,
     checked: Math.random() > 0.5, // Aleatoriamente true o false
@@ -97,10 +130,15 @@ function generateRandomStates(): { name: string; checked: boolean }[] {
 
 /** Builds and returns a new User. */
 function createNewUser(nro: number): PolicyData {
-    const concept = CONCEPTS[Math.floor(Math.random() * CONCEPTS.length)];
+  const concept = CONCEPTS[Math.floor(Math.random() * CONCEPTS.length)];
+  const company = COMPANIES[Math.floor(Math.random() * COMPANIES.length)];
+  const insure = INSURERS[Math.floor(Math.random() * INSURERS.length)];
+
   return {
     number: nro.toString(),
+    insure_company: insure,
     concept: concept,
+    company: company, 
     states: generateRandomStates(),
   };
 }
