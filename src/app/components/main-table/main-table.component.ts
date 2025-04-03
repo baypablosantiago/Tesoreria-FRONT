@@ -11,9 +11,11 @@ import { PolicyCreateComponent } from "../policy-create/policy-create.component"
 
 export interface PolicyData {
   number: string;
-  insure_company: string,
+  receipt_date: string;
   concept: string;
-  company: string; 
+  companyName: string; 
+  companyCuil: string; 
+  insurer: string;
   states: { name: string; checked: boolean }[];
 }
 
@@ -39,37 +41,49 @@ const CONCEPTS: string[] = [
   'OBJETO DE LA LICITACIÓN O EL CONTRATO: Desarrollo de plataformas web y aplicaciones móviles para facilitar trámites ciudadanos y mejorar la transparencia en la gestión pública. Se requiere una interfaz accesible e intuitiva, con funcionalidades de autogestión y herramientas de participación ciudadana para fortalecer la relación entre gobierno y sociedad.',
 ];
 
-const COMPANIES: string[] = [
-  'DEL LITORAL OBRAS, SERVICIOS Y MONTAJES S.A. 30-69155938-2',
-  'CONSTRUCCIONES DEL SUR S.A. 30-61234567-8',
-  'INGENIERÍA Y MONTAJES ARGENTINA S.R.L. 30-70987654-3',
-  'TECNOLOGÍAS AMBIENTALES S.A. 30-65432198-7',
-  'SERVICIOS INDUSTRIALES DEL NORTE S.R.L. 30-67895432-1',
+const COMPANIES: { name: string; cuil: string }[] = [
+  { name: 'DEL LITORAL OBRAS, SERVICIOS Y MONTAJES S.A.', cuil: '30-69155938-2' },
+  { name: 'CONSTRUCCIONES DEL SUR S.A.', cuil: '30-61234567-8' },
+  { name: 'INGENIERÍA Y MONTAJES ARGENTINA S.R.L.', cuil: '30-70987654-3' },
+  { name: 'TECNOLOGÍAS AMBIENTALES S.A.', cuil: '30-65432198-7' },
+  { name: 'SERVICIOS INDUSTRIALES DEL NORTE S.R.L.', cuil: '30-67895432-1' },
 ];
 
 const INSURERS: string[] = [
-  'Instituto Autárquico Provincial del Seguro',
-  'La Caja de Ahorro y Seguro S.A.',
-  'Federación Patronal Seguros S.A.',
+  'IAPSER',
+  'La Caja',
+  'Federación Patronal',
   'Sancor Seguros',
   'Seguros Rivadavia',
-  'Grupo Asegurador La Segunda',
+  'La Segunda',
   'San Cristóbal Seguros',
   'Provincia Seguros S.A.',
   'Meridional Seguros',
   'Nación Seguros S.A.',
   'Orbis Seguros',
   'Allianz Argentina',
-  'Zurich Argentina Seguros',
+  'Zurich',
   'BBVA Seguros',
   'Mapfre Argentina',
-  'Berkley International Seguros',
+  'Berkley International',
   'Triunfo Seguros',
   'Galeno Seguros',
   'Paraná Seguros',
   'Boston Seguros',
 ];
 
+const POLICIES_RECEIPT: string[] = [
+  '01/04/2024 - 09:30',
+  '02/04/2024 - 14:15',
+  '03/04/2024 - 10:45',
+  '04/04/2024 - 16:20',
+  '05/04/2024 - 11:10',
+  '06/04/2024 - 08:50',
+  '07/04/2024 - 12:30',
+  '08/04/2024 - 15:00',
+  '09/04/2024 - 09:00',
+  '10/04/2024 - 13:45',
+];
 
 /**
  * @title Data table with sorting, pagination, and filtering.
@@ -91,7 +105,7 @@ const INSURERS: string[] = [
 ],
 })
 export class MainTableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['number', 'insurance company','concept', 'company', 'states', 'action'];  dataSource: MatTableDataSource<PolicyData>;
+  displayedColumns: string[] = ['number', 'reception','concept', 'company', 'states', 'action'];  dataSource: MatTableDataSource<PolicyData>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -132,13 +146,16 @@ function generateRandomStates(): { name: string; checked: boolean }[] {
 function createNewUser(nro: number): PolicyData {
   const concept = CONCEPTS[Math.floor(Math.random() * CONCEPTS.length)];
   const company = COMPANIES[Math.floor(Math.random() * COMPANIES.length)];
-  const insure = INSURERS[Math.floor(Math.random() * INSURERS.length)];
+  const insurer = INSURERS[Math.floor(Math.random() * INSURERS.length)];
+  const receip = POLICIES_RECEIPT[Math.floor(Math.random() * POLICIES_RECEIPT.length)];
 
   return {
     number: nro.toString(),
-    insure_company: insure,
+    receipt_date: receip,
     concept: concept,
-    company: company, 
+    companyName: company.name,
+    companyCuil: company.cuil,
+    insurer: insurer,
     states: generateRandomStates(),
   };
 }

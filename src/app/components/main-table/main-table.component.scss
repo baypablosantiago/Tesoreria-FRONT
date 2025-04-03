@@ -18,3 +18,14 @@ table {
     word-wrap: break-word; /* Rompe el texto en palabras si es muy largo */
     max-width: 300px; /* Define un ancho máximo para evitar que crezca demasiado */
   }
+
+  .insurer {
+    font-size: 0.9em;
+    color: gray;
+  }
+
+  .cuil {
+    font-size: 1em;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+  }
