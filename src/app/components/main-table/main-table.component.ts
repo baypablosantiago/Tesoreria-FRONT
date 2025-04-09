@@ -8,16 +8,7 @@ import { StatesComponent } from '../states/states.component';
 import { DashButtonComponent } from '../dash-button/dash-button.component';
 import { RouterModule } from '@angular/router';
 import { PolicyCreateComponent } from "../policy-create/policy-create.component";
-
-export interface PolicyData {
-  number: string;
-  receipt_date: string;
-  concept: string;
-  companyName: string; 
-  companyCuil: string; 
-  insurer: string;
-  states: { name: string; checked: boolean }[];
-}
+import { Policy } from '../../models/policy';
 
 const CONCEPTS: string[] = [
   'OBJETO DE LA LICITACIÓN O EL CONTRATO: Compra de equipos informáticos para la modernización de las oficinas gubernamentales, incluyendo computadoras, servidores y periféricos de última generación, con el objetivo de optimizar los procesos administrativos y mejorar la eficiencia en la gestión pública. Se requiere también la instalación, configuración y mantenimiento de los equipos, asegurando su compatibilidad con los sistemas existentes.',
@@ -105,7 +96,7 @@ const POLICIES_RECEIPT: string[] = [
 ],
 })
 export class MainTableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['number', 'reception','concept', 'company', 'states', 'action'];  dataSource: MatTableDataSource<PolicyData>;
+  displayedColumns: string[] = ['number', 'reception','concept', 'company', 'states', 'action'];  dataSource: MatTableDataSource<Policy>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -143,7 +134,7 @@ function generateRandomStates(): { name: string; checked: boolean }[] {
 }
 
 /** Builds and returns a new User. */
-function createNewUser(nro: number): PolicyData {
+function createNewUser(nro: number): Policy {
   const concept = CONCEPTS[Math.floor(Math.random() * CONCEPTS.length)];
   const company = COMPANIES[Math.floor(Math.random() * COMPANIES.length)];
   const insurer = INSURERS[Math.floor(Math.random() * INSURERS.length)];
