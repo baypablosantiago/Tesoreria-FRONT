@@ -9,6 +9,8 @@ import { DashButtonComponent } from '../dash-button/dash-button.component';
 import { RouterModule } from '@angular/router';
 import { PolicyCreateComponent } from "../policy-create/policy-create.component";
 import { Policy } from '../../models/policy';
+import { RetrivePolicyService } from '../../services/retrive-policy.service';
+import { HttpClient } from '@angular/common/http';
 
 const CONCEPTS: string[] = [
   'OBJETO DE LA LICITACIÓN O EL CONTRATO: Compra de equipos informáticos para la modernización de las oficinas gubernamentales, incluyendo computadoras, servidores y periféricos de última generación, con el objetivo de optimizar los procesos administrativos y mejorar la eficiencia en la gestión pública. Se requiere también la instalación, configuración y mantenimiento de los equipos, asegurando su compatibilidad con los sistemas existentes.',
@@ -76,9 +78,6 @@ const POLICIES_RECEIPT: string[] = [
   '10/04/2024 - 13:45',
 ];
 
-/**
- * @title Data table with sorting, pagination, and filtering.
- */
 @Component({
   selector: 'app-main-table',
   styleUrl: 'main-table.component.scss',
@@ -101,12 +100,9 @@ export class MainTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(Math.round(Math.random() * (150000 - 180000) + 150000)));
-
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  constructor(private retrivePolicy: RetrivePolicyService) {
+    
+    this.dataSource = new MatTableDataSource();
   }
 
   ngAfterViewInit() {
@@ -122,19 +118,34 @@ export class MainTableComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  fakeData():void{
+    const users = Array.from({length: 100}, (_, k) => createNewPolicy(Math.round(Math.random() * (150000 - 180000) + 150000)));
+    this.dataSource = new MatTableDataSource(users);
+    this.ngAfterViewInit();
+  }
+
+  testApi(){
+    this.retrivePolicy.getNewPolicies().subscribe({
+      next: (data) => {
+        console.log(data)
+      },
+      error: () => {
+
+      }
+    });
+  }
 }
 
-/** Genera un conjunto de estados aleatorios */
 function generateRandomStates(): { name: string; checked: boolean }[] {
   const stateNames = ['Recibida en correo.', 'Cargado en SIAF con concepto: ___', 'Tiene retencion de fondo de reparo.','Retención Pagada.'];
   return stateNames.map(name => ({
     name,
-    checked: Math.random() > 0.5, // Aleatoriamente true o false
+    checked: Math.random() > 0.5, 
   }));
 }
 
-/** Builds and returns a new User. */
-function createNewUser(nro: number): Policy {
+function createNewPolicy(nro: number): Policy {
   const concept = CONCEPTS[Math.floor(Math.random() * CONCEPTS.length)];
   const company = COMPANIES[Math.floor(Math.random() * COMPANIES.length)];
   const insurer = INSURERS[Math.floor(Math.random() * INSURERS.length)];
