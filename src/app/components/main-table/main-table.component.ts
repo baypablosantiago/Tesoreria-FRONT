@@ -129,9 +129,10 @@ export class MainTableComponent implements AfterViewInit {
     this.retrivePolicy.getNewPolicies().subscribe({
       next: (data) => {
         console.log(data)
+        alert("WORKING!")
       },
       error: () => {
-
+        alert("dotnet run?")
       }
     });
   }
