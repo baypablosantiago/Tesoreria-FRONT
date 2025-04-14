@@ -1,6 +1,6 @@
 export interface Policy {
     number: string;
-    receipt_date: string;
+    reception: string;
     concept: string;
     companyName: string; 
     companyCuil: string; 

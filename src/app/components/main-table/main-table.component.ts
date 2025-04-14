@@ -119,16 +119,17 @@ export class MainTableComponent implements AfterViewInit {
   }
 
   fakeData():void{
-    const users = Array.from({length: 100}, (_, k) => createNewPolicy(Math.round(Math.random() * (150000 - 180000) + 150000)));
-    this.dataSource = new MatTableDataSource(users);
+    const policies = Array.from({length: 100}, (_, k) => createNewPolicy(Math.round(Math.random() * (150000 - 180000) + 150000)));
+    this.dataSource = new MatTableDataSource(policies);
     this.ngAfterViewInit();
   }
 
   testApi(){
     this.retrivePolicy.getNewPolicies().subscribe({
-      next: (data) => {
-        console.log(data)
-        alert("WORKING!")
+      next: (data: Policy[]) => {
+        const currentData = this.dataSource.data;
+        this.dataSource.data = [...currentData, ...data];
+        console.log(data);
       },
       error: () => {
         alert("dotnet run?")
@@ -153,7 +154,7 @@ function createNewPolicy(nro: number): Policy {
 
   return {
     number: nro.toString(),
-    receipt_date: receip,
+    reception: receip,
     concept: concept,
     companyName: company.name,
     companyCuil: company.cuil,
