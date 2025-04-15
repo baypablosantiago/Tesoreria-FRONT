@@ -5,5 +5,10 @@ export interface Policy {
     companyName: string; 
     companyCuil: string; 
     insurer: string;
-    states: { name: string; checked: boolean }[];
+    states: States[];
+}
+
+export interface States {
+    name:string;
+    checked: boolean;
 }
