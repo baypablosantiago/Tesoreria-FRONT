@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { PolicyCreateComponent } from "../policy-create/policy-create.component";
 import { Policy } from '../../models/policy';
 import { RetrivePolicyService } from '../../services/retrive-policy.service';
+import { PolicyService } from '../../services/policy.service';
 
 const CONCEPTS: string[] = [
   'OBJETO DE LA LICITACIÓN O EL CONTRATO: Compra de equipos informáticos para la modernización de las oficinas gubernamentales, incluyendo computadoras, servidores y periféricos de última generación, con el objetivo de optimizar los procesos administrativos y mejorar la eficiencia en la gestión pública. Se requiere también la instalación, configuración y mantenimiento de los equipos, asegurando su compatibilidad con los sistemas existentes.',
@@ -99,7 +100,7 @@ export class MainTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private retrivePolicy: RetrivePolicyService) {
+  constructor(private retrivePolicy: RetrivePolicyService, private policies: PolicyService) {
     
     this.dataSource = new MatTableDataSource();
   }
@@ -125,7 +126,7 @@ export class MainTableComponent implements AfterViewInit {
   }
 
   testApi(){
-    this.retrivePolicy.getNewPolicies().subscribe({
+    this.policies.getAll().subscribe({
       next: (data: Policy[]) => {
         const currentData = this.dataSource.data;
         this.dataSource.data = [...currentData, ...data];
@@ -135,6 +136,7 @@ export class MainTableComponent implements AfterViewInit {
         alert("dotnet run?")
       }
     });
+    
   }
 }
 
