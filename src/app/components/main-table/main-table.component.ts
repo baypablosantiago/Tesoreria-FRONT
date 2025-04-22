@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
@@ -94,7 +94,7 @@ const POLICIES_RECEIPT: string[] = [
     PolicyCreateComponent
 ],
 })
-export class MainTableComponent implements AfterViewInit {
+export class MainTableComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['number', 'reception','concept', 'company', 'states', 'action'];  dataSource: MatTableDataSource<Policy>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -103,6 +103,10 @@ export class MainTableComponent implements AfterViewInit {
   constructor(private retrivePolicy: RetrivePolicyService, private policies: PolicyService) {
     
     this.dataSource = new MatTableDataSource();
+  }
+
+  ngOnInit(): void {
+    this.loadData();
   }
 
   ngAfterViewInit() {
@@ -125,19 +129,33 @@ export class MainTableComponent implements AfterViewInit {
     this.ngAfterViewInit();
   }
 
-  testApi(){
+  loadData(){
     this.policies.getAll().subscribe({
       next: (data: Policy[]) => {
-        const currentData = this.dataSource.data;
-        this.dataSource.data = [...currentData, ...data];
+        this.dataSource.data = data;
         console.log(data);
       },
-      error: () => {
+      error: (err) => {
+        console.log(err);
         alert("dotnet run?")
       }
-    });
-    
+    })
   }
+
+  retriveData() {
+  this.retrivePolicy.getNewPolicies().subscribe({
+    next: (data: Policy[]) => {
+      const currentData = this.dataSource.data;
+      this.dataSource.data = [...currentData, ...data];
+      console.log(data);
+    },
+    error: (err) => {
+      console.log(err);
+      alert("dotnet run?")
+    }
+  })
+}
+
 }
 
 function generateRandomStates(): { name: string; checked: boolean }[] {
