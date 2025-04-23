@@ -133,7 +133,7 @@ export class MainTableComponent implements AfterViewInit, OnInit {
     this.policies.getAll().subscribe({
       next: (data: Policy[]) => {
         this.dataSource.data = data;
-        console.log(data);
+        console.log("Data loadead!");
       },
       error: (err) => {
         console.log(err);
@@ -147,7 +147,7 @@ export class MainTableComponent implements AfterViewInit, OnInit {
     next: (data: Policy[]) => {
       const currentData = this.dataSource.data;
       this.dataSource.data = [...currentData, ...data];
-      console.log(data);
+      console.log("Data retrived from API!");
     },
     error: (err) => {
       console.log(err);
