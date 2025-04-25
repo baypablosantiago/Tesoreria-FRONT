@@ -34,7 +34,7 @@
     <!-- Company Column -->
     <ng-container matColumnDef="company">
       <th mat-header-cell *matHeaderCellDef> Empresa </th>
-      <td mat-cell *matCellDef="let row">
+      <td mat-cell *matCellDef="let row" class="responsive-column">
         <div>{{ row.companyName }}</div>
         <div class="cuil">{{ row.companyCuil }}</div>
       </td>

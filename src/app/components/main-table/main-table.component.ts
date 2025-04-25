@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {afterNextRender, AfterRenderPhase, AfterViewInit, Component, inject, NgZone, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
@@ -11,6 +11,7 @@ import { PolicyCreateComponent } from "../policy-create/policy-create.component"
 import { Policy } from '../../models/policy';
 import { RetrivePolicyService } from '../../services/retrive-policy.service';
 import { PolicyService } from '../../services/policy.service';
+import { timer } from 'rxjs/internal/observable/timer';
 
 const CONCEPTS: string[] = [
   'OBJETO DE LA LICITACIÓN O EL CONTRATO: Compra de equipos informáticos para la modernización de las oficinas gubernamentales, incluyendo computadoras, servidores y periféricos de última generación, con el objetivo de optimizar los procesos administrativos y mejorar la eficiencia en la gestión pública. Se requiere también la instalación, configuración y mantenimiento de los equipos, asegurando su compatibilidad con los sistemas existentes.',
@@ -99,18 +100,39 @@ export class MainTableComponent implements AfterViewInit, OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  ngZone: any;
 
   constructor(private retrivePolicy: RetrivePolicyService, private policies: PolicyService) {
     
     this.dataSource = new MatTableDataSource();
+
+    const ngZone = inject(NgZone);
+
+    afterNextRender(() => { // necesario para evitar el bloqueo que genera SSR en el render
+      timer(10000, 10000).subscribe(() => {
+        ngZone.run(() => {
+          this.retriveData();
+        });
+      });
+    }, { phase: AfterRenderPhase.Write });
   }
 
   ngOnInit(): void {
     this.loadData();
+    this.retriveData();
   }
 
   ngOnDestroy() {
 
+  }
+
+  startAutoRetrive() {
+    const ngZone = this.ngZone;
+    timer(10000, 10000).subscribe(() => {
+      ngZone.run(() => {
+        this.retriveData();
+      });
+    });
   }
 
   ngAfterViewInit() {
