@@ -109,6 +109,10 @@ export class MainTableComponent implements AfterViewInit, OnInit {
     this.loadData();
   }
 
+  ngOnDestroy() {
+
+  }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
