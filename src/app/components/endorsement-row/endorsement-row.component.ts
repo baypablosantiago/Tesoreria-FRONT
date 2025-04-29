@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-endorsement-row',
@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './endorsement-row.component.scss'
 })
 export class EndorsementRowComponent {
-
+  @Input() number!: string; 
 }

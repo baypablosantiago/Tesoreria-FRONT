@@ -14,5 +14,5 @@ import { RouterModule } from '@angular/router';
   imports: [MatButtonModule, MatDividerModule, MatIconModule,RouterModule],
 })
 export class DashButtonComponent {
-  @Input() number!: string; // Recibe el ID de la póliza
+  @Input() number!: string; 
 }
