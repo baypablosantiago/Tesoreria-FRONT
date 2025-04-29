@@ -30,10 +30,18 @@ table {
     font-weight: bold;
   }
 
-  .sub-row td {
-    background-color: #d3d3d3;
-    border-top: 1px solid #ccc;
+  .principal-row td {
+    background-color: #efdbff;
+    border-top: 1px solid #000000;
     border-bottom: 1px solid #ccc;
+    padding: 10px 16px;
+    color: #444;
+  }
+
+  .sub-row td {
+    background-color: #f9ecff;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #000000;
     padding: 10px 16px;
     color: #444;
   }
