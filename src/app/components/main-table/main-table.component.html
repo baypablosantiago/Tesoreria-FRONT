@@ -54,7 +54,7 @@
     
     <ng-container matColumnDef="secondary">
       <td mat-cell *matCellDef="let row" [attr.colspan]="displayedColumns.length">
-        <app-endorsement-row [number]="row.number"></app-endorsement-row>
+        <app-endorsement-row [number]="row.number" [amount]="row.endorsements"></app-endorsement-row>
       </td>
     </ng-container>
 
