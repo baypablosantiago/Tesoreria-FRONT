@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class RetrivePolicyService {
 
-  private apiUrl = 'http://localhost:5166/api/emailreader';
+  private apiUrl = 'https://tesoreria-polizas-back-production.up.railway.app/api/emailreader';
+
   constructor(private http: HttpClient) { }
 
   getNewPolicies()

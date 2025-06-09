@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class PolicyService {
 
-  private apiUrl = 'http://localhost:5166/api/policy';
+  private apiUrl = 'https://tesoreria-polizas-back-production.up.railway.app/api/policy';
+
   constructor(private http: HttpClient) { }
 
   getAll()
